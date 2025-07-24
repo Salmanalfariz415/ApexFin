@@ -2,24 +2,20 @@ const nodemailer = require('nodemailer');
 const express = require('express');
 require('dotenv').config();
 const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
-
-// FIXED: Use () to call the Router function
 const router = express.Router();
-
-// FIXED: Use express.json() middleware on the router
 router.use(express.json());
 
 
-
-module.exports = pool;
+const pool = require('../database/pool.js');
 
 
 // Make the route handler async
-router.post('/send/email', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
-        const email = req.body.email;
+        let email = req.body.email;
         let otp = generateOTP();
-        // Validate email
+
+
         if (!email) {
             return res.status(400).json({ message: 'Email is required' });
         }
@@ -39,20 +35,23 @@ router.post('/send/email', async (req, res) => {
             to: email,
             subject: 'Your OTP Code',
             text: `Your One-Time Password (OTP) is: ${otp}`,
-            html: `
-    <h2>Verification Code</h2>
-    <p>Your One-Time Password (OTP) is:</p>
-    <h1 style="color: #2e6da4;">${otp}</h1>
-    <p>This OTP is valid for 5 minutes.</p>
-  `
+            html: `<h2>Verification Code</h2>
+            <p>Your One-Time Password (OTP) is:</p>
+            <h1 style="color: #2e6da4;">${otp}</h1>
+            <p>This OTP is valid for 5 minutes.</p>`
         };
 
-
+        
         // Send email directly (no nested function needed)
         const info = await transporter.sendMail(mailOptions);
 
+
+        const [result] = await pool.execute(`INSERT INTO otp_store (email, otp, expires_at) VALUES (?, ?, NOW() + INTERVAL ? MINUTE)`,[email, otp, 5]);
+        
         console.log('Email sent successfully');
         console.log('Message ID:', info.messageId);
+
+        console.log('OTP inserted successfully:', result);
 
         // Send response
         res.status(200).json({
@@ -69,6 +68,4 @@ router.post('/send/email', async (req, res) => {
     }
 });
 
-
-// FIXED: Export the router properly
 module.exports = router;

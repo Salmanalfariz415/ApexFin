@@ -18,6 +18,20 @@ function sendEmail(userEmail){
             }
         })
 }
+
+function sendOtp(otp){
+    fetch('api/send/otp',{
+        method : 'POST',
+        headers:{
+            'Content-Type' : 'application/json'
+        },
+        body : JSON.stringify({
+            otp: otp,
+            email:email
+        })
+    })
+}
+
 submit.addEventListener('click', async function() {
     userEmail = emailInput.value.trim();
     if(userEmail ==""){
@@ -26,20 +40,12 @@ submit.addEventListener('click', async function() {
     else{
         sendEmail(userEmail);
     response.innerHTML = "Email sent successfully!";
-    optinp.style.opacity=1;
+    otpinp.style.opacity=1;
+    otpsubmit.style.opacity=1;
     }
 });
-function sendOtp(otp){
-    fetch('api/send/otp',{
-        method : 'POST',
-        headers:{
-            'Content-Type' : 'application/json'
-        },
-        body : JSON.stringify({
-            otp: otp
-        })
-    })
-}
+
+
 otpsubmit.addEventListener("click",()=>{
     sendOtp(otp);
 })
