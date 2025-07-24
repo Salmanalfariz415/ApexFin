@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
 const express = require('express');
 require('dotenv').config();
+const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
 
 // FIXED: Use () to call the Router function
 const router = express.Router();
@@ -12,7 +13,7 @@ router.use(express.json());
 router.post('/send/email', async (req, res) => {
     try {
         const email = req.body.email;
-
+        let otp = generateOTP();
         // Validate email
         if (!email) {
             return res.status(400).json({ message: 'Email is required' });
@@ -31,26 +32,32 @@ router.post('/send/email', async (req, res) => {
         const mailOptions = {
             from: process.env.GMAIL_USER,
             to: email,
-            subject: 'Test Email',
-            text: 'Hello from Node.js!',
-            html: '<h1>Hello from Node.js!</h1><p>This is an HTML email.</p>'
+            subject: 'Your OTP Code',
+            text: `Your One-Time Password (OTP) is: ${otp}`,
+            html: `
+    <h2>Verification Code</h2>
+    <p>Your One-Time Password (OTP) is:</p>
+    <h1 style="color: #2e6da4;">${otp}</h1>
+    <p>This OTP is valid for 5 minutes.</p>
+  `
         };
+
 
         // Send email directly (no nested function needed)
         const info = await transporter.sendMail(mailOptions);
-        
+
         console.log('Email sent successfully');
         console.log('Message ID:', info.messageId);
 
         // Send response
-        res.status(200).json({ 
+        res.status(200).json({
             message: "Email sent successfully",
             messageId: info.messageId
         });
 
     } catch (error) {
         console.error('Error sending email:', error);
-        res.status(500).json({ 
+        res.status(500).json({
             message: 'Failed to send email',
             error: error.message
         });
