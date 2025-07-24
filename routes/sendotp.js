@@ -9,6 +9,11 @@ const router = express.Router();
 // FIXED: Use express.json() middleware on the router
 router.use(express.json());
 
+
+
+module.exports = pool;
+
+
 // Make the route handler async
 router.post('/send/email', async (req, res) => {
     try {
@@ -63,6 +68,7 @@ router.post('/send/email', async (req, res) => {
         });
     }
 });
+
 
 // FIXED: Export the router properly
 module.exports = router;
