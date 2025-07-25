@@ -4,7 +4,6 @@ let emailInput=document.getElementById('emailInput');
 let userEmail;
 let otpinp=document.getElementById('otpInput');
 let otpsubmit=document.getElementById('otpsubmit');
-
 let otp=otpinp.value;
 
 function sendEmail(userEmail){

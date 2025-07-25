@@ -1,8 +1,9 @@
 let express=require('express');
 let router=express.Router();
-const {sendOtp,otpCheck} = require('otpController.js');
+const {sendEmail,otpCheck} = require('../controller/otpController.js');
 
-router.post('/send/otp',sendOtp);
+router.post('/send/email',sendEmail);
+router.post('/send/otp',otpCheck);
 
 
 module.exports=router;
