@@ -8,6 +8,7 @@ const sendEmail = async (req, res) => {
   try {
     const email = req.body.email;
     const otp = generateOTP();
+    const pass=req.body.pass;
 
     if (!email) {
       return res.status(400).json({ message: 'Email is required' });
@@ -37,11 +38,10 @@ const sendEmail = async (req, res) => {
     };
 
     const info = await transporter.sendMail(mailOptions);
+    await pool.execute('INSERT INTO user_details (email, password, created_at) VALUES (?, ?, NOW())',[email, pass]);
 
     await pool.execute(
-      `INSERT INTO otp_store (email, otp, expires_at) VALUES (?, ?, NOW() + INTERVAL ? MINUTE)`,
-      [email, otp, 5]
-    );
+      `INSERT INTO otp_store (email, otp, expires_at) VALUES (?, ?, NOW() + INTERVAL ? MINUTE)`,[email, otp, 5]);
 
     console.log('OTP sent to:', email);
     console.log('Message ID:', info.messageId);
@@ -65,7 +65,7 @@ const otpCheck=async(req,res)=>{
     let otp=req.body.otp;
     let email=req.body.email;
     let [result]=await pool.query('SELECT otp, expires_at FROM otp_store WHERE email = ? AND expires_at > NOW() ORDER BY created_at DESC LIMIT 1',[email]);
-    finalotp=result.otp;
+    storedOtp=result.otp;
     if (otp === storedOtp) {
         await pool.query('DELETE FROM otp_store WHERE email = ?', [email]);
         res.status(200).json({
@@ -73,7 +73,8 @@ const otpCheck=async(req,res)=>{
       }
     else {
             res.status(400).json({
-                message: 'Invalid OTP'
+                message: 'Invalid OTP',
+                data:result
             });
         }
     }
