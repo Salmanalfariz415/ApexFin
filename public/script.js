@@ -9,7 +9,7 @@ let pass;
 
 async function sendUser(userEmail,pass){
     try{
-        const result=await fetch('api/user/register',{
+        const result=await fetch('/register/send/email',{
             method:'POST',
             body : JSON.stringify({
                 email:userEmail,

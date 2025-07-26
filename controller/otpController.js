@@ -8,7 +8,6 @@ const sendEmail = async (req, res) => {
   try {
     const email = req.body.email;
     const otp = generateOTP();
-    const pass=req.body.pass;
 
     if (!email) {
       return res.status(400).json({ message: 'Email is required' });
@@ -38,7 +37,6 @@ const sendEmail = async (req, res) => {
     };
 
     const info = await transporter.sendMail(mailOptions);
-    await pool.execute('INSERT INTO user_details (email, password, created_at) VALUES (?, ?, NOW())',[email, pass]);
 
     await pool.execute(
       `INSERT INTO otp_store (email, otp, expires_at) VALUES (?, ?, NOW() + INTERVAL ? MINUTE)`,[email, otp, 5]);
