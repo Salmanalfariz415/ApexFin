@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div id="main">
-        <input type="text" id="emailInput" placeholder="Enter you Email" class="main-b">
-    <button id="submitButton" class="main-b">Submit</button>
-    <input type="text" id="otpInput" placeholder="Enter the otp" class="main-b"> 
-    <button id="otpsubmit">Submit2</button>
-    </div>
-    
-    <h1 id="response"></h1>
-
-    <script src="script.js"></script>
+  <div class="card">
+    <h2>Login</h2>
+    <input type="email" id="emailInput" placeholder="Enter email address" />
+    <button id="submitButton" class="btn btn-submit" >Submit</button>
+    <input type="text" id="otpInput" placeholder="Enter the Otp" style="opacity: 0;"/>
+    <button id="otpsubmit" class="btn btn-login" style="opacity: 0;">Log in</button>
+  </div>
+  <h2 id="response"></h2>
+  <script src="script.js"></script>
 </body>
 </html>

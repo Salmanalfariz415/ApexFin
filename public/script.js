@@ -4,13 +4,12 @@ let emailInput=document.getElementById('emailInput');
 let userEmail;
 let otpinp=document.getElementById('otpInput');
 let otpsubmit=document.getElementById('otpsubmit');
-let otp=otpinp.value;
 
 function sendEmail(userEmail){
-        return fetch('api/send/email',{
+        return fetch('/api/send/email',{
             method: 'POST',
             body: JSON.stringify({
-                email: userEmail
+                email : userEmail
             }),
             headers: {
                 'Content-Type': 'application/json'
@@ -19,14 +18,14 @@ function sendEmail(userEmail){
 }
 
 function sendOtp(otp){
-    fetch('api/send/otp',{
+    fetch('/api/send/otp',{
         method : 'POST',
         headers:{
             'Content-Type' : 'application/json'
         },
         body : JSON.stringify({
-            otp: otp,
-            email:email
+            otp : otp,
+            email : userEmail
         })
     })
 }
@@ -45,6 +44,14 @@ submit.addEventListener('click', async function() {
 });
 
 
-otpsubmit.addEventListener("click",()=>{
-    sendOtp(otp);
-})
+otpsubmit.addEventListener("click", async function () {
+    let otp = otpinp.value.trim();
+    try {
+        await sendOtp(otp); 
+        response.innerHTML = "OTP sent successfully!";
+    } catch (err) {
+        console.error(err);
+        response.innerHTML = "OTP error: " + err.message;
+    }
+});
+
