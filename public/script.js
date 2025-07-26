@@ -6,13 +6,32 @@ let otpinp=document.getElementById('otpInput');
 let otpsubmit=document.getElementById('otpsubmit');
 let passInp=document.getElementById('passInput');
 let pass;
-async function sendEmail(userEmail,pass){
+
+async function sendUser(userEmail,pass){
+    try{
+        const result=await fetch('api/user/register',{
+            method:'POST',
+            body : JSON.stringify({
+                email:userEmail,
+                pass : pass
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        const data=await result.json();
+        return{success:result.ok,data:data}
+    }
+    catch(err){
+        return{success:false,error:err.message}
+    }
+}
+async function sendEmail(userEmail){
         try{
             const result = await fetch('/api/send/email',{
             method: 'POST',
             body: JSON.stringify({
                 email : userEmail,
-                pass : pass
             }),
             headers: {
                 'Content-Type': 'application/json'
