@@ -73,7 +73,12 @@ submit.addEventListener('click', async function() {
         response.innerHTML = "Kindly input the email";
     }
     else{ 
-        const result = await sendEmail(userEmail, pass); 
+        const result1=await sendUser(userEmail,pass);
+        const result = await sendEmail(userEmail); 
+
+        if (!result1.success) {
+    console.log("Registration Success");
+    return;}
         
         if(result.success) {
             response.innerHTML = "Email sent successfully!";

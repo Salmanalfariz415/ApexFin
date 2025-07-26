@@ -6,9 +6,10 @@ require('dotenv').config();
 const errorHandler = require('./middleware/errorHandler.js');
 
 const otp=require('./routes/otpRouter.js');
+const register=require('./routes/userRouter.js');
 
 app.use('/api',otp);
-app.use('/register','./router/userDetailsController.js');
+app.use('/register',register);
 
 const port = process.env.PORT || 3000;
 app.use(errorHandler);
