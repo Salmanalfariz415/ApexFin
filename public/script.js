@@ -100,6 +100,10 @@ otpsubmit.addEventListener("click", async function () {
     } else {
         response.innerHTML = "OTP error: " + (result.data?.message || result.error);
     }
+    setTimeout(() => {
+    window.location.href = "/login.html";
+    }, 1000);
+
 });
 
 if (performance.navigation.type === 1) {
