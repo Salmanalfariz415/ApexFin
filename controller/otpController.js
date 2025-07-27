@@ -63,7 +63,7 @@ const otpCheck=async(req,res)=>{
     let otp=req.body.otp;
     let email=req.body.email;
     let [result]=await pool.query('SELECT otp, expires_at FROM otp_store WHERE email = ? AND expires_at > NOW() ORDER BY created_at DESC LIMIT 1',[email]);
-    storedOtp=result.otp;
+    let storedOtp=result.otp;
     if (otp === storedOtp) {
         await pool.query('DELETE FROM otp_store WHERE email = ?', [email]);
         res.status(200).json({

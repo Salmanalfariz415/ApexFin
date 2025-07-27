@@ -68,7 +68,8 @@ async function sendOtp(otp,userEmail){
 submit.addEventListener('click', async function() {
     userEmail = emailInput.value.trim();
     pass = passInp.value.trim();
-    
+    otpinp.style.opacity = 1;
+    otpsubmit.style.opacity = 1;
     if(userEmail == ""){
         response.innerHTML = "Kindly input the email";
     }
@@ -82,8 +83,7 @@ submit.addEventListener('click', async function() {
         
         if(result.success) {
             response.innerHTML = "Email sent successfully!";
-            otpinp.style.opacity = 1;
-            otpsubmit.style.opacity = 1;
+            
         } else {
             response.innerHTML = "Failed to send email: " + result.error;
         }
@@ -102,3 +102,6 @@ otpsubmit.addEventListener("click", async function () {
     }
 });
 
+if (performance.navigation.type === 1) {
+    window.location.href = "index2.html";
+}

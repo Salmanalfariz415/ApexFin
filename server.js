@@ -1,6 +1,12 @@
 const express = require('express');
+const path=require('path');
 const app = express();
 app.use(express.json());
+
+app.get('/',(req,res)=>{
+    res.sendFile(path.join(__dirname,'public','index2.html'));
+});
+
 app.use(express.static('public'));
 require('dotenv').config();
 const errorHandler = require('./middleware/errorHandler.js');
