@@ -101,11 +101,11 @@ otpsubmit.addEventListener("click", async function () {
         response.innerHTML = "OTP error: " + (result.data?.message || result.error);
     }
     setTimeout(() => {
-    window.location.href = "login/login.html";
+    window.location.href = "../main/";
     }, 1000);
 
 });
 
 if (performance.navigation.type === 1) {
-    window.location.href = "dashboard/dashboard.html";
+    window.location.href = "/";
 }

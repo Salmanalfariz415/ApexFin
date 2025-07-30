@@ -46,12 +46,12 @@ input[type="text"] {
 
 input[type="email"]:focus,
 input[type="text"]:focus {
-  border-color: #0a4db0;
+  border-color: #0b5ed7;
 }
 
 /* Buttons */
 .btn {
-  width: 100%;
+  width: 60%;
   padding: 12px;
   font-size: 15px;
   font-weight: 500;
@@ -63,7 +63,7 @@ input[type="text"]:focus {
 
 /* Submit Button */
 #submitButton {
-  background-color: #0b72c6;
+  background-color: #0b5ed7;
   color: #fff;
   margin-bottom: 20px;
 }
@@ -74,7 +74,8 @@ input[type="text"]:focus {
 
 /* OTP Submit Button */
 #otpsubmit {
-  background-color: #0a4db0;
+  width:auto;
+  background-color: #0b5ed7;
   color: #fff;
 }
 
