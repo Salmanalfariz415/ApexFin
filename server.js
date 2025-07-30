@@ -4,7 +4,7 @@ const app = express();
 app.use(express.json());
 
 app.get('/',(req,res)=>{
-    res.sendFile(path.join(__dirname,'public','dashboard.html'));
+    res.sendFile(path.join(__dirname,'public','dashboard','dashboard.html'));
 });
 
 app.use(express.static('public'));
