@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QuickPay Dashboard</title>
+  <link rel="stylesheet" href="./main-style.css" />
+</head>
+<body>
+  <header class="dashboard-header">
+    <h2 class="logo">QuickPay</h2>
+    <div class="dashboard-actions">
+      <button onclick="location.href='make-payment.html'" class="btn">💸 Make Payment</button>
+      <button onclick="location.href='transaction-history.html'" class="btn">📜 View History</button>
+      <button onclick="logout()" class="btn logout-btn">🚪 Logout</button>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <h3>👋 Welcome, <span id="username">User</span>!</h3>
+    <p>Your current balance: ₹<span id="balance">0</span></p>
+
+    <h4>Recent Transactions</h4>
+    <table class="transaction-table">
+      <thead>
+        <tr>
+          <th>To</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody id="transactionRows">
+        <!-- JavaScript will populate rows here -->
+      </tbody>
+    </table>
+  </main>
+
+  <script src="./main-script.js"></script>
+</body>
+</html>
