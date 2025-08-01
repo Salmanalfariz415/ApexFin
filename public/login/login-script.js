@@ -1,25 +1,24 @@
 if (performance.navigation.type === 1) {
-    window.location.href = "/dashboard";
+    window.location.href = "/";
 }
 let email=document.getElementById("email");
 let pass=document.getElementById("password");
-let submit=document.getElementById("submit");
+let loginform=document.getElementById("loginform");
 let userEmail;
 let passwd;
 let response=document.getElementById("response");
 
 async function sendEmail(userEmail,passwd){
     try{
-        const result = await fetch('/login/send',{
+        const result = await fetch('/login',{
         method:'POST',
-        headers: {
-                'Content-Type': 'application/json'
-        },
         body : JSON.stringify({
             email:userEmail,
-            password:passwd,
-            
-        })
+            password:passwd
+        }),
+        headers: {
+                'Content-Type': 'application/json'
+        }
     })
     const data=await result.json();
         return{success:result.ok,data:data};
@@ -29,13 +28,14 @@ async function sendEmail(userEmail,passwd){
 
     }
 }
-loginsubmit.addEventListener("click",async function(){
-    userEmail=email.value.trim;
-    passwd=pass.value.trim;
-    sendEmail(userEmail,passwd);
+loginform.addEventListener("submit",async function(event){
+    event.preventDefault()
+    userEmail = email.value.trim();
+    passwd=pass.value.trim();
     const result=await sendEmail(userEmail,passwd);
     if(result.success){
         response.innerHTML="Successfully Logged In";
+        window.location.href="../main/"
     }
     else{
         response.innerHTML="Invalid Credentails";
