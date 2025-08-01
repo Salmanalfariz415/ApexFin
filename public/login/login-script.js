@@ -35,9 +35,9 @@ loginsubmit.addEventListener("click",async function(){
     sendEmail(userEmail,passwd);
     const result=await sendEmail(userEmail,passwd);
     if(result.success){
-        response.innerHTML="Successfully Logged In"
+        response.innerHTML="Successfully Logged In";
     }
     else{
-        response.innerHTML="Invalid Credentails"
+        response.innerHTML="Invalid Credentails";
     }
 });
