@@ -6,7 +6,7 @@
 
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #051e3e;
+  background-color: #84cae7;
   color: white;
   overflow-x: hidden;
 }
@@ -14,14 +14,14 @@ body {
 .header {
   position: relative;
   height: 150px;
-  background-color: #051e3e;
+  background-color: #84cae7;
 }
 
 .curve-bg {
   position: absolute;
   width: 100%;
   height: 150px;
-  background: linear-gradient(135deg, #c850c0, #4158d0);
+  background: linear-gradient(135deg, #0b5ed7, #ffffff);
   border-bottom-right-radius: 150px;
   z-index: 1;
 }
@@ -45,6 +45,7 @@ body {
 }
 
 .auth-buttons {
+  margin-top: 20px;
   display: flex;
   gap: 10px;
 }
@@ -77,14 +78,40 @@ body {
 }
 
 .main-content {
-  margin-top: -90px;
+  margin-top: 0px;
   display: flex;
-  justify-content: center;
+  justify-content:flex-start;
   padding: 15px;
 }
 
 .dashboard-img {
-  max-width: 100%;
+
+  max-width: 36%;
+  max-height: 35%;
   height: auto;
   border-radius: 20px;
 }
+
+.intro-text {
+  background-color: #f2f6fa;
+  padding-top: 40px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 10px;
+  margin: 30px auto;
+  max-width: 700px;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.intro-text h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.intro-text p {
+  color: #555;
+  line-height: 1.6;
+}
+
