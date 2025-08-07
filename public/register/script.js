@@ -101,7 +101,7 @@ otpsubmit.addEventListener("click", async function () {
         response.innerHTML = "OTP error: " + (result.data?.message || result.error);
     }
     setTimeout(() => {
-    window.location.href = "../main/";
+    window.location.href = "../views/main/";
     }, 1000);
 
 });

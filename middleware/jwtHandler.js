@@ -24,7 +24,6 @@ const validate= asyncHandler(async(req,res,next)=>{
         return res.status(401).json({
             message: "Access token is missing or invalid",
         });}
-    next(); 
 })
 
 module.exports = validate;

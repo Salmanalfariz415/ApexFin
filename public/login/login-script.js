@@ -36,9 +36,10 @@ loginform.addEventListener("submit",async function(event){
     if(result.success){
         localStorage.setItem("token", result.data.token);
         response.innerHTML="Successfully Logged In";
-        window.location.href="../main/"
+        window.location.href = "../views/main/";
     }
     else{
         response.innerHTML="Invalid Credentails";
     }
 });
+

@@ -1,5 +1,6 @@
 const bcrypt=require('bcrypt');
 const pool = require('../database/pool'); 
+const jwt=require("jsonwebtoken");
 const checkEmail=async (req,res)=>{
     if (!req.body) {
         console.error('Error: Request body is missing or undefined.');
@@ -13,6 +14,7 @@ const checkEmail=async (req,res)=>{
         const [storedHashedPassword] = await pool.execute('SELECT password FROM user_details WHERE email = ?',[email]);
         const match = await bcrypt.compare(password, storedHashedPassword[0].password);
         const loginTime = new Date();
+        const [rows]=await pool.query('SELECT * FROM user_details WHERE email = ?',[email]);
 
 //Making Jason Web Token after logging in
         const token = jwt.sign({
