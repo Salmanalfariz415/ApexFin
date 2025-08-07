@@ -34,6 +34,7 @@ loginform.addEventListener("submit",async function(event){
     passwd=pass.value.trim();
     const result=await sendEmail(userEmail,passwd);
     if(result.success){
+        localStorage.setItem("token", result.data.token);
         response.innerHTML="Successfully Logged In";
         window.location.href="../main/"
     }
